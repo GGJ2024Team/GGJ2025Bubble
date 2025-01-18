@@ -12,9 +12,9 @@ signal bubble_die(score)
 
 
 func _ready():
-    var ui = get_tree().get_root().get_node("Game/UI")
-    connect("bubble_gen", ui, "update_score")
-    connect("bubble_die", ui, "update_score")
+    var game = get_tree().get_root().get_node("Game")
+    connect("bubble_gen", game, "update_score")
+    connect("bubble_die", game, "update_score")
     emit_signal("bubble_gen", score)
     add_to_group("bubble")
     
