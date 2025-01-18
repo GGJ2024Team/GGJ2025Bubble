@@ -13,8 +13,8 @@ var color = ""
 var color_map = {
     "white": Color(1, 1, 1, 1),
     "red": Color(1, 0, 0, 1),
-#    "green": Color(0, 1, 0, 1),
-#    "blue": Color(0, 0, 1, 1)
+    "green": Color(0, 1, 0, 1),
+    "blue": Color(0, 0, 1, 1)
    }
 
 onready var sprite = $AnimatedSprite
