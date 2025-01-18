@@ -1,7 +1,9 @@
 extends Node2D
 
+onready var animation = $AnimationPlayer
+
 func _ready():
-    pass # Replace with function body.
+    animation.play("wind")
 
 func _on_Area2D_area_entered(area):
     if is_instance_valid(area):
