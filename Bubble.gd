@@ -63,7 +63,7 @@ func _physics_process(delta):
     else:
         speed = 5
         direction = Vector2(0, 1)
-    self.position += direction*speed
+    self.position += direction*speed + get_wind()
 
 func _integrate_forces(state):
     # 检测和处理挤压效果
@@ -107,3 +107,7 @@ func play_bubble_sound():
     audio_player.stream = bubble_sound 
     audio_player.play() 
     audio_player.connect("finished", audio_player, "queue_free")  # 播放结束后自动释放播放器
+
+func get_wind():
+    var parent = get_parent()
+    return parent.wind_dir*parent.wind_speed
