@@ -28,7 +28,7 @@ func _ready():
     if color == "":
         color = get_random_color()
     sprite.modulate = color_map[color]
-    var game = get_tree().get_root().get_node("Game")
+    var game = get_tree().get_root().get_node("GameControl/Game")
     connect("bubble_gen", game, "update_score")
     connect("bubble_die", game, "update_score")
     emit_signal("bubble_gen", score)

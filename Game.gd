@@ -6,8 +6,8 @@ onready var score_label = $UI/HUD/ColorRect/Score
 onready var http_request = $HTTPRequest
 
 func _ready():
-    print('connect bubblegen')
-    connect("bubble_gen", self, "update_score")
+    pass
+
 
 func update_score(score_chg):
     score += score_chg
