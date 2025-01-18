@@ -1,7 +1,7 @@
 extends Node2D
 
-export(NodePath) var Fan: NodePath
-onready var wind_force_area = get_node(Fan)
+# export(NodePath) var Fan: NodePath = "Fan"
+onready var wind_force_area = get_node("Fan")
 
 var wind_strength: float = 100.0
 var target_rotation: float = 0.0

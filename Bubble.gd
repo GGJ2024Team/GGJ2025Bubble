@@ -9,6 +9,8 @@ var bubble_strength = 1000
 var is_merged = false
 var scale_factor = 1
 var color = ""
+var blower_node :Node2D = null
+
 
 var color_map = {
     "white": Color(1, 1, 1, 1),
@@ -21,6 +23,7 @@ onready var sprite = $AnimatedSprite
 onready var area2d = $Area2D
 onready var coll2d = $CollisionShape2D
 var bubble_sound = preload("res://assets/bubble-sound-43207.mp3")
+
 
 signal bubble_gen(score)
 signal bubble_die(score)
@@ -35,9 +38,16 @@ func _ready():
     connect("bubble_die", game, "update_score")
     emit_signal("bubble_gen", score)
     add_to_group("bubble")
+    load_blower_node()
     sprite.scale = Vector2(1, 1)*scale_factor
     if scale_factor > 4:
         die()
+        
+func load_blower_node():
+    if not blower_node:
+        blower_node = get_tree().get_root().get_node("GameControl/Game/Character/Blower")
+        if not blower_node:
+            print("警告：未能找到 Blower 节点")
     
 func _process(delta):
     var node_position = global_position  
@@ -57,14 +67,40 @@ func die():
     queue_free()
 
 func _physics_process(delta):
+    # 判断风向
+    var blower_node_position
+    if blower_node:
+        blower_node_position = blower_node.global_transform.get_rotation() + deg2rad(45)
+    # else:
+    #     blower_node_position = Vector2.ZERO
+        
     if self.in_fan_range:
         speed = 20
-        direction = Vector2(0, -1)
+        direction = Vector2(0, -1).rotated(blower_node_position)
     else:
         speed = 5
         direction = Vector2(0, 1)
-    self.position += direction*speed
+        
+    self.apply_central_impulse(direction * speed)
 
+    # 泡泡的左右上下边缘横坐标
+    var booble_left_position_x = global_position.x - scale_factor / 2
+    var booble_right_position_x = global_position.x + scale_factor / 2
+    var booble_top_position_y = global_position.y - scale_factor / 2
+    var booble_bottom_position_y = global_position.y + scale_factor / 2
+    # 检查是否超出屏幕边界
+    if booble_left_position_x  < 0 or booble_right_position_x > screen_size.x:
+        # 碰到左右边缘反弹
+        direction.x *= -0.8
+
+    if booble_top_position_y < 0:
+        # 碰到顶部边缘反弹
+        direction.y *= -0.8
+
+
+    # 更新位置
+    self.position += direction * speed
+    
 func _integrate_forces(state):
     # 检测和处理挤压效果
     for body in get_colliding_bodies():
