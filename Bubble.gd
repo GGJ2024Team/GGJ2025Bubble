@@ -88,6 +88,7 @@ func merge_with(other_bubble):
     merged_bubble.position = new_position
     merged_bubble.bubble_scale(scale_factor*2)
     merged_bubble.color = color
+    merged_bubble.score = score + other_bubble.score
     get_parent().add_child(merged_bubble)
     other_bubble.die()  # 销毁与其合并的气泡
     die()
