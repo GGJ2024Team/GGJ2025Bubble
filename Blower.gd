@@ -23,9 +23,3 @@ func _process(delta):
     # 平滑旋转到目标角度
     target_rotation = lerp(rotation, target_angle, delta * rotation_speed)
     rotation = target_rotation
-    
-    print("Current Rotation:", rad2deg(rotation))
-    # 更新风力方向和强度
-#    if wind_force_area:
-#        wind_force_area.set_wind_direction(Vector2(cos(target_rotation), sin(target_rotation)))
-#        wind_force_area.set_wind_strength(wind_strength)
