@@ -20,11 +20,13 @@ var color_map = {
 onready var sprite = $AnimatedSprite
 onready var area2d = $Area2D
 onready var coll2d = $CollisionShape2D
+var bubble_sound = preload("res://assets/bubble-sound-43207.mp3")
 
 signal bubble_gen(score)
 signal bubble_die(score)
 
 func _ready():
+    play_bubble_sound()
     if color == "":
         color = get_random_color()
     sprite.modulate = color_map[color]
@@ -97,3 +99,11 @@ func _on_Area2D_area_entered(area):
     var obj = area.get_parent()
     if can_merge(obj):
         merge_with(obj)
+
+func play_bubble_sound():
+    var audio_player = AudioStreamPlayer.new()
+    add_child(audio_player)
+    bubble_sound.loop = false
+    audio_player.stream = bubble_sound 
+    audio_player.play() 
+    audio_player.connect("finished", audio_player, "queue_free")  # 播放结束后自动释放播放器
