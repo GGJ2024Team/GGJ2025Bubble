@@ -48,3 +48,27 @@ func on_return():
     
 func on_restart():
     emit_signal("game_restart")
+    
+func wind():
+    var wind_gust = load("res://WindGust.tscn")
+    add_child(wind_gust)
+    
+func start_random_timer():
+    var random_time = randi()%3 + 1
+    wind_timer.wait_time = random_time
+    wind_timer.start()
+
+func random_wind():
+    if randi()%100 <= 100:
+        wind_dir = get_random_direction()
+        wind_speed = randi()%3 + 3
+    
+func get_random_direction() -> Vector2:
+    var angle = randf()*3.1415926*2
+    return Vector2(cos(angle), sin(angle)).normalized()
+    
+func _on_WindTimer_timeout():
+    wind_dir = Vector2.ZERO
+    wind_speed = 0
+    random_wind()
+    start_random_timer()
