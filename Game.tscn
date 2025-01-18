@@ -37,3 +37,7 @@ text = "SCORE: 0"
 valign = 1
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="WindTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="WindTimer" to="." method="_on_WindTimer_timeout"]
