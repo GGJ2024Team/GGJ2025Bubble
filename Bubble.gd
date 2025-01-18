@@ -8,13 +8,13 @@ var in_fan_range = false
 var bubble_strength = 1000
 var is_merged = false
 var scale_factor = 1
-var color = "white"
+var color = ""
 
 var color_map = {
     "white": Color(1, 1, 1, 1),
     "red": Color(1, 0, 0, 1),
-    "green": Color(0, 1, 0, 1),
-    "blue": Color(0, 0, 1, 1)
+#    "green": Color(0, 1, 0, 1),
+#    "blue": Color(0, 0, 1, 1)
    }
 
 onready var sprite = $AnimatedSprite
@@ -25,7 +25,8 @@ signal bubble_gen(score)
 signal bubble_die(score)
 
 func _ready():
-    color = get_random_color()
+    if color == "":
+        color = get_random_color()
     sprite.modulate = color_map[color]
     var game = get_tree().get_root().get_node("Game")
     connect("bubble_gen", game, "update_score")
@@ -86,6 +87,7 @@ func merge_with(other_bubble):
     var merged_bubble = load("res://Bubble.tscn").instance()
     merged_bubble.position = new_position
     merged_bubble.bubble_scale(scale_factor*2)
+    merged_bubble.color = color
     get_parent().add_child(merged_bubble)
     other_bubble.die()  # 销毁与其合并的气泡
     die()
