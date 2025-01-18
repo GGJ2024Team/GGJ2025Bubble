@@ -2,12 +2,8 @@ extends Node2D
 
 var game_started = false
 var score = 0
-var wind_dir = Vector2.ZERO
-var wind_speed = 0
-
 onready var score_label = $UI/HUD/ColorRect/Score
 onready var http_request = $HTTPRequest
-onready var wind_timer = $WindTimer
 
 signal return_to_main_menu
 signal game_restart
@@ -15,8 +11,7 @@ signal game_restart
 func _ready():
     connect("return_to_main_menu", get_parent(), "load_main_menu")
     connect("game_restart", get_parent(), "load_game")
-    start_random_timer()
-    
+
 func update_score(score_chg):
     score += score_chg
     score_label.text = "SCORE: " + str(score)
@@ -53,26 +48,3 @@ func on_return():
     
 func on_restart():
     emit_signal("game_restart")
-    
-func wind():
-    var wind_gust = load("res://WindGust.tscn")
-    add_child(wind_gust)
-    
-func start_random_timer():
-    var random_time = randi()%3 + 1
-    wind_timer.wait_time = random_time
-    wind_timer.start()
-
-func random_wind():
-    print("random wind")
-    if randi()%100 <= 100:
-        wind_dir =  Vector2(rand_dir_num(), rand_dir_num())
-        wind_speed = randi()%3
-    print(wind_dir)
-    
-func rand_dir_num():
-    return randi()%2 - 1
-    
-func _on_WindTimer_timeout():
-    random_wind()
-    start_random_timer()
