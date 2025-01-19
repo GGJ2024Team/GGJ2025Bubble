@@ -27,8 +27,8 @@ func _ready():
 
 func update_score(score_chg):
     score += score_chg
-    score_label.text = "SCORE: " + str(score) + " " + "| MAX SCORE: " + str(max_score)
     max_score = max(max_score, score)
+    score_label.text = "SCORE: " + str(score) + " " + "| MAX SCORE: " + str(max_score)
     if not game_started and score > 0:
         game_started = true
     if game_started and score <= 0:
