@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/bg2.png" type="Texture" id=1]
 [ext_resource path="res://Character.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Fonts/kfn_50_o1.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/Fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Game.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.235294 )
+use_filter = true
+font_data = ExtResource( 3 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
@@ -28,11 +35,12 @@ color = Color( 0.654902, 0.529412, 0.529412, 1 )
 
 [node name="Score" type="Label" parent="UI/HUD/ColorRect"]
 anchor_right = 1.0
-margin_left = 100.0
-margin_top = 10.0
-margin_right = -50.0
-margin_bottom = 110.0
-custom_fonts/font = ExtResource( 3 )
+margin_left = 19.0
+margin_top = 13.0
+margin_right = -131.0
+margin_bottom = 113.0
+rect_min_size = Vector2( 700, 100 )
+custom_fonts/font = SubResource( 1 )
 text = "SCORE: 0"
 valign = 1
 
