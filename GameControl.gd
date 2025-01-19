@@ -13,7 +13,7 @@ func load_main_menu():
     quit.connect("pressed", self, "on_quit_pressed")
 
 func load_game():
-    if game_scene != null:
+    if is_instance_valid(game_scene):
         game_scene.name = "GameRemoved"
         game_scene.queue_free()
     game_scene = load("res://Game.tscn").instance()
