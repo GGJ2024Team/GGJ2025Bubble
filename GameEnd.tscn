@@ -1,19 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/UI/font_50.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/UI/return.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/restart.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/blue_button03.png" type="Texture" id=4]
 [ext_resource path="res://assets/UI/blue_button05.png" type="Texture" id=5]
 [ext_resource path="res://GameEnd.gd" type="Script" id=6]
-[ext_resource path="res://assets/Fonts/kfn_30_o1.tres" type="DynamicFont" id=7]
-
-[sub_resource type="DynamicFont" id=1]
-size = 50
-outline_size = 1
-outline_color = Color( 0, 0, 0, 0.235294 )
-use_filter = true
-font_data = ExtResource( 1 )
 
 [node name="GameEnd" type="Control"]
 anchor_right = 1.0
@@ -38,7 +30,7 @@ margin_top = 19.0
 margin_right = 501.0
 margin_bottom = 319.0
 rect_min_size = Vector2( 200, 300 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
 text = "Opps!
 Your Lost all bubbles!"
 align = 1
@@ -83,7 +75,7 @@ margin_top = 297.0
 margin_right = 530.0
 margin_bottom = 797.0
 rect_min_size = Vector2( 450, 500 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 1 )
 text = "==========
 ScoreBOARD"
 autowrap = true
