@@ -36,7 +36,11 @@ func _ready():
     var game = get_tree().get_root().get_node("GameControl/Game")
     connect("bubble_gen", game, "update_score")
     connect("bubble_die", game, "update_score")
-    emit_signal("bubble_gen", score)
+    if not is_merged:
+        emit_signal("bubble_gen", score)
+    else:
+        emit_signal("bubble_gen", 0)
+        is_merged = false
     add_to_group("bubble")
     load_blower_node()
     if scale_factor > 4:
@@ -66,7 +70,8 @@ func bubble_scale(factor):
     scale_factor = factor
     
 func die():
-    emit_signal("bubble_die", -score)
+    if not is_merged:
+        emit_signal("bubble_die", -score)
     queue_free()
 
 func _physics_process(delta):
@@ -130,9 +135,10 @@ func merge_with(other_bubble):
     merged_bubble.bubble_scale(scale_factor*2)
     merged_bubble.color = color
     merged_bubble.score = score + other_bubble.score
+    merged_bubble.is_merged = true
     get_parent().add_child(merged_bubble)
     other_bubble.die()  # 销毁与其合并的气泡
-    die()
+    self.die()
 
 func _on_Area2D_area_entered(area):
     var obj = area.get_parent()
