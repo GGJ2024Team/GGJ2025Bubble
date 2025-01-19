@@ -89,16 +89,7 @@ func _on_WindTimer_timeout():
     random_wind()
     start_random_timer()
 
-func get_scoreboard():
-    var url = URL_BASE + "/scoreboard/info"
-    var params = "?password=" + PASSWORD
-    http_request.timeout = 3.0  # 秒
-    var result = http_request.request(url + params)
-    if result != OK:
-        print("Failed to request URL:", url)
-
 func _on_OKButton_pressed():
-    print(line_edit.text)
     if line_edit.text != "":
         character.enable_gen_bubble = true
         username = line_edit.text

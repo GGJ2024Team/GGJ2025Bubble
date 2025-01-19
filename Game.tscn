@@ -72,7 +72,7 @@ rect_min_size = Vector2( 400, 100 )
 custom_colors/cursor_color = Color( 0.580392, 0.505882, 0.505882, 1 )
 custom_colors/font_color_selected = Color( 0.72549, 0.65098, 0.65098, 1 )
 custom_fonts/font = ExtResource( 4 )
-max_length = 15
+max_length = 5
 
 [node name="OKButton" type="Button" parent="UI/GetNameRect"]
 margin_left = 188.0
