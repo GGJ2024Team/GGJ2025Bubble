@@ -13,6 +13,9 @@ var URL_BASE = "http://146.190.117.12:8080"
 onready var score_label = $UI/HUD/ColorRect/Score
 onready var http_request = $HTTPRequest
 onready var wind_timer = $WindTimer
+onready var line_edit = $UI/GetNameRect/Label/LineEdit
+onready var character = $Character
+onready var get_name_rect = $UI/GetNameRect
 
 signal return_to_main_menu
 signal game_restart
@@ -93,3 +96,10 @@ func get_scoreboard():
     var result = http_request.request(url + params)
     if result != OK:
         print("Failed to request URL:", url)
+
+func _on_OKButton_pressed():
+    print(line_edit.text)
+    if line_edit.text != "":
+        character.enable_gen_bubble = true
+        username = line_edit.text
+        get_name_rect.queue_free()
