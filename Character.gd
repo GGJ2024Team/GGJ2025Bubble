@@ -3,6 +3,7 @@ extends Node2D
 var BUBBLE_CD = 10 # second
 var last_gen_bubble = 0
 var character_width = 100 # 角色宽度
+var enable_gen_bubble = false
 
 var screen_rect: Rect2
 onready var sprite = $Sprite
@@ -18,7 +19,7 @@ func gen_bubble():
     self.get_parent().add_child(bubble, true)
     
 func _process(delta):
-    if Input.is_action_just_pressed("gen_bubble"):
+    if enable_gen_bubble and Input.is_action_just_pressed("gen_bubble"):
         gen_bubble()
         
 func _physics_process(delta):

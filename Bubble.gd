@@ -13,13 +13,13 @@ var blower_node :Node2D = null
 
 
 var color_map = {
-    "white": Color(1, 1, 1, 1),
-    "red": Color(1, 0, 0, 1),
-    "green": Color(0, 1, 0, 1),
-    "blue": Color(0, 0, 1, 1)
+    "white": Color(1, 1, 1, 0.75),
+    "red": Color(1, 0, 0, 0.75),
+    "green": Color(0, 1, 0, 0.75),
+    "blue": Color(0, 0, 1, 0.75)
    }
 
-onready var sprite = $AnimatedSprite
+onready var sprite = $Sprite
 onready var area2d = $Area2D
 onready var coll2d = $CollisionShape2D
 var bubble_sound = preload("res://assets/bubble-sound-43207.mp3")
@@ -39,9 +39,12 @@ func _ready():
     emit_signal("bubble_gen", score)
     add_to_group("bubble")
     load_blower_node()
-    sprite.scale = Vector2(1, 1)*scale_factor
     if scale_factor > 4:
         die()
+    else:
+        sprite.scale = Vector2(1, 1)*scale_factor
+        area2d.scale = Vector2(1, 1)*scale_factor
+        coll2d.scale = Vector2(1, 1)*scale_factor
         
 func load_blower_node():
     if not blower_node:

@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/bg2.png" type="Texture" id=1]
 [ext_resource path="res://Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/Fonts/kfn_30_o1.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Game.gd" type="Script" id=5]
+[ext_resource path="res://assets/Fonts/kfn_40_o1.tres" type="DynamicFont" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -44,8 +46,46 @@ custom_fonts/font = SubResource( 1 )
 text = "SCORE: 0"
 valign = 1
 
+[node name="GetNameRect" type="ColorRect" parent="UI"]
+margin_left = 131.0
+margin_top = 489.0
+margin_right = 631.0
+margin_bottom = 789.0
+rect_min_size = Vector2( 500, 400 )
+color = Color( 0.847059, 0.537255, 0.537255, 1 )
+
+[node name="Label" type="Label" parent="UI/GetNameRect"]
+margin_left = 17.0
+margin_top = 13.0
+margin_right = 482.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 300, 200 )
+custom_fonts/font = ExtResource( 4 )
+text = "Input Your Name"
+
+[node name="LineEdit" type="LineEdit" parent="UI/GetNameRect/Label"]
+margin_left = 33.0
+margin_top = 63.0
+margin_right = 433.0
+margin_bottom = 263.0
+rect_min_size = Vector2( 400, 100 )
+custom_colors/cursor_color = Color( 0.580392, 0.505882, 0.505882, 1 )
+custom_colors/font_color_selected = Color( 0.72549, 0.65098, 0.65098, 1 )
+custom_fonts/font = ExtResource( 4 )
+max_length = 15
+
+[node name="OKButton" type="Button" parent="UI/GetNameRect"]
+margin_left = 188.0
+margin_top = 321.0
+margin_right = 288.0
+margin_bottom = 371.0
+rect_min_size = Vector2( 100, 50 )
+custom_fonts/font = ExtResource( 6 )
+text = "OK"
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="WindTimer" type="Timer" parent="."]
 
+[connection signal="pressed" from="UI/GetNameRect/OKButton" to="." method="_on_OKButton_pressed"]
 [connection signal="timeout" from="WindTimer" to="." method="_on_WindTimer_timeout"]
