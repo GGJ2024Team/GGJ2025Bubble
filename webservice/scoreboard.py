@@ -52,7 +52,7 @@ class scoreboard_update:
 
             old_score = int(res[0][1])
             if new_score > old_score:
-                sql = "UPDATE scores SET score ={score} WHERE username='{username}'".format(score=new_score, username=data.username)
+                sql = "UPDATE score SET score ={score} WHERE username='{username}'".format(score=new_score, username=data.username)
                 print(sql)
                 res = cur.execute(sql)
                 con.commit()

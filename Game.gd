@@ -2,6 +2,7 @@ extends Node2D
 
 var game_started = false
 var score = 0
+var max_score = 0
 var wind_dir = Vector2.ZERO
 var wind_speed = 0
 var username = "unknow_user"
@@ -23,7 +24,8 @@ func _ready():
 
 func update_score(score_chg):
     score += score_chg
-    score_label.text = "SCORE: " + str(score)
+    score_label.text = "SCORE: " + str(score) + " " + "| MAX SCORE: " + str(max_score)
+    max_score = max(max_score, score)
     if not game_started and score > 0:
         game_started = true
     if game_started and score <= 0:
@@ -32,7 +34,7 @@ func update_score(score_chg):
 func on_game_end():
     print("on_game_end()")
     var url = URL_BASE + "/scoreboard/update"
-    var params = "?password=" + PASSWORD + "&username=" + username + "&score=" + str(score)
+    var params = "?password=" + PASSWORD + "&username=" + username + "&score=" + str(max_score)
     http_request.timeout = 3.0  # 秒
     var result = http_request.request(url + params)
     if result != OK:
